@@ -55,9 +55,8 @@ def shorten():
             return 'url not valid';
         hsh = hash_url(long_url)
         hsh_string = string(hsh)
-        short_url = '%s.herokuapp.com' % os.environ['APP_NAME']
-        print('Your URL is shortened as:\n%s' % short_url)
-        send_message('Your URL is shortened as:\n%s' % short_url, chat_id)
+        short_url = '%s.herokuapp.com/%s' % (os.environ['APP_NAME'], hsh_string)
+        send_message(short_url, chat_id)
         db.session.add(Url(hsh=hsh, long_url=long_url))
         db.session.commit()
     except KeyError:
