@@ -36,8 +36,8 @@ def hash_url(long_url):
 def string(hsh):
     s = ''
     while hsh != 0:
-        s += char[hsh % MOD]
-        hsh //= MOD
+        s += char[hsh % BASE]
+        hsh //= BASE
     return s
 
 def send_message(text, chat_id):
