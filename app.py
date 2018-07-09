@@ -36,7 +36,7 @@ def hash_url(long_url):
 def string(hsh):
     s = ''
     while hsh != 0:
-        s += char(hsh % MOD)
+        s += char[hsh % MOD]
         hsh //= MOD
     return s
 
@@ -59,7 +59,7 @@ def shorten():
         db.session.add(Url(hsh=hsh, long_url=long_url))
         db.session.commit()
         send_message('Your URL is shortened as:\n%s' % short_url, chat_id)
-    except keyError:
+    except KeyError:
         pass
     return 'Ok'
 
