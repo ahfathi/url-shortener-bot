@@ -56,6 +56,11 @@ def shorten():
     try:
         long_url = req['message']['text']
         chat_id = req['message']['chat']['id']
+        if long_url.startswith('/'):
+            if long_url == '/start':
+                text = 'Welcome to Shortit Bot! you can send me a long url and I will compress it for you, so you would be able to easily share it.'
+                send_message(text, chat_id)
+            return 'Ok'
         if not validators.url(long_url):
             send_message('The entered URL in not valid!', chat_id)
             return 'url not valid';
