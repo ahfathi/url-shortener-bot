@@ -53,7 +53,7 @@ def shorten():
         if not validators.url(long_url):
             send_message('The entered URL in not valid!', chat_id)
             return 'url not valid';
-        hsh = hash_url(lond_url)
+        hsh = hash_url(long_url)
         hsh_string = string(hsh)
         short_url = '%s.herokuapp.com' % os.environ['APP_NAME']
         db.session.add(Url(hsh=hsh, long_url=long_url))
@@ -61,6 +61,7 @@ def shorten():
         send_message('Your URL is shortened as:\n%s' % short_url, chat_id)
     except keyError:
         pass
+    return 'Ok'
 
 @app.route('/', defaults={'path': ''}, methods=['GET'])
 @app.route('/<path:path>')
