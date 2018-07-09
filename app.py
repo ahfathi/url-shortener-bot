@@ -40,6 +40,12 @@ def string(hsh):
         hsh //= BASE
     return s
 
+def int(hsh_string):
+    r = 0
+    for c in hsh_string[-1::-1]:
+        r = r*BASE + code[c]
+    return r
+
 def send_message(text, chat_id):
     url = URL + 'sendMessage?text={}&chat_id={}'.format(text, chat_id)
     requests.get(url)
@@ -66,7 +72,7 @@ def shorten():
 @app.route('/', defaults={'path': ''}, methods=['GET'])
 @app.route('/<path:path>')
 def expand(path):
-    url = Url.query.filter_by(hsh=path).first()
+    url = Url.query.filter_by(hsh=int(path)).first()
     return redirect(url.long_url)
 
 if __name__ == '__main__':
