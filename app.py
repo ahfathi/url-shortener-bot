@@ -3,7 +3,6 @@ from models import db, Url
 import requests
 import validators
 import os
-import sys
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
@@ -56,9 +55,7 @@ def shorten():
             return 'url not valid';
         hsh = hash_url(long_url)
         hsh_string = string(hsh)
-        short_url = '%s.herokuapp.com/%s' % (os.environ['APP_NAME'], hsh_string)
-        print(hsh, hsh_string, short_url)
-        sys.stdout.flush()
+        short_url = 'sibly.herokuapp.com/%s' % hsh_string
         send_message(short_url, chat_id)
         db.session.add(Url(hsh=hsh, long_url=long_url))
         db.session.commit()
