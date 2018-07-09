@@ -58,7 +58,7 @@ def shorten():
         short_url = '%s.herokuapp.com' % os.environ['APP_NAME']
         db.session.add(Url(hsh=hsh, long_url=long_url))
         db.session.commit()
-        send_message('Your URL is shortened as:\n%s' % short_url, chat_id)
+        send_message('Your URL is shortened as:\n%s' % 'short_url', chat_id)
     except KeyError:
         pass
     return 'Ok'
@@ -66,7 +66,7 @@ def shorten():
 @app.route('/', defaults={'path': ''}, methods=['GET'])
 @app.route('/<path:path>')
 def expand(path):
-    url = Url.query.filter_by(hsh=path)
+    url = Url.query.filter_by(hsh=path).first()
     return redirect(url.long_url)
 
 if __name__ == '__main__':
