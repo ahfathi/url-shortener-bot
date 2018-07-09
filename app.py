@@ -57,7 +57,7 @@ def shorten():
         hsh_string = string(hsh)
         short_url = '%s.herokuapp.com' % os.environ['APP_NAME']
         db.session.add(Url(hsh=hsh, long_url=long_url))
-        db.commit()
+        db.session.commit()
         send_message('Your URL is shortened as:\n%s' % short_url, chat_id)
     except keyError:
         pass
